@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+text-align: center;
+margin: auto;
+width: 50%;
+border: 10px solid black;
+background-color: DodgerBlue;
+}
+</style>
+
+
+
+<!--Beginning of the Javascript. I created a function called playgame and some
+variables. I did not account the first time creating this that people could use
+capitalization, and in return the game would not work. I googled and found a
+variable I could use called .tolowercase, and this would ignore capitalization
+and read any capitalization in the text as lowercase.-->
+
+  <script type="text/javascript">
+function playGame() {
+  var playerChoice = document.getElementById("playerChoice").value;
+  var playerLowerCase = playerChoice.toLowerCase();
+  var outputMessage = "";
+
+
+/* Player chooses one of the three options, then computer will get
+html element id, and select rock, paper, or scissors. It will then compare
+computer choice to the player choice.
+*/
+
+  if(playerLowerCase === "rock" || playerLowerCase === "paper" || playerLowerCase === "scissors") {
+    var comChoice = computerChoice();
+    document.getElementById("computerChoice").innerHTML = "Computer plays " + comChoice;
+
+    outputMessage = compare(playerLowerCase, comChoice);
+
+  } else {
+    outputMessage = "Invalid choice try again!"
+  }
+
+/* the output message will gather the html element by id and the output message
+will then be printed out whether it be a win, loss, or invalid choice.
+*/
+  document.getElementById("outputMessage").innerHTML = outputMessage;
+}
+
+/* Using the function compare, I compared the player choice and computer choice
+to determine a winner.
+*/
+function compare (choice1, choice2){
+  if (choice1 === choice2) {
+    return "The result is a tie!";
+  }
+
+/* These are the if/else statements. I did an if/else statement for each choice
+and gave each choice its winning and losing conditions.
+*/
+
+  if (choice1 === "rock") {
+    if (choice2 === "paper") {
+      return "Paper wins!";
+    } else if (choice2 === "scissors") {
+      return "Rock Wins!";
+    }
+
+    }
+    else if (choice1 === "paper"){
+      if (choice2 === "rock") {
+        return "Paper wins!";
+      } else if (choice2 === "scissors") {
+        return "Scissors win!";
+      }
+
+    } else if (choice1 === "scissors") {
+      if (choice2 === "rock") {
+        return "Rock wins!";
+      } else if (choice2 === "paper") {
+        return "Scissors win!";
+      }
+    }
+  }
+
+/* I created a function called computerchoice and using math.random, which is
+a random number generator that will pick a number between 0 and 1. Doing this
+will give me 3 options for computerchoice to randomly pick rock, paper, or
+scissors. 0 < 0.34 = rock, 0 <= 0.67 = paper, and anything else = scissors
+
+*/
+function computerChoice() {
+  var choice = Math.random();
+  if (choice < 0.34) {
+    return "rock";
+  } else if (choice <= 0.67) {
+    return "paper";
+  } else {
+    return "scissors";
+  }
+}
+
+  </script>
+
+  <!--This is the html of the document. It shows the text, and also holds id's
+  that i've created for our functions in the Javascript portion of the
+  document.-->
+
+
+</head>
+<body>
+  <h1>Rock, Paper, Scissors</h1>
+  <h3> Enter rock, paper, or scissors</h3>
+  <input id="playerChoice" type="text">
+<button onclick="playGame()">Play</button>
+<p id="computerChoice"></p>
+<p id="outputMessage"></p>
+
+
+</body>
+</html>
